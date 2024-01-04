@@ -1,20 +1,11 @@
 using UnityEngine;
 
-public class Medkit : MonoBehaviour
+public class Medkit : Item
 {
     public int healthRecoveryAmount = 100;
 
-    private void OnTriggerEnter(Collider other)
+    public override void UseItem(PlayerController playerController)
     {
-        if (other.CompareTag("Player"))
-        {
-            Use();
-        }
-    }
-
-    public void Use()
-    {
-        Debug.Log("Health should increase by {healthRecoveryAmount}.");
-        Destroy(gameObject);
+        playerController.Heal(healthRecoveryAmount);
     }
 }

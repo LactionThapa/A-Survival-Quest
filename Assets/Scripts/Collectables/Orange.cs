@@ -1,19 +1,11 @@
 using UnityEngine;
 
-public class Orange : MonoBehaviour
+public class Orange : Item
 {
     public int healthRecoveryAmount = 25;
 
-    private void OnTriggerEnter(Collider other)
+    public override void UseItem(PlayerController playerController)
     {
-        if (other.CompareTag("Player"))
-        {
-            // other.GetComponent<PlayerHealth>().Heal(healthRecoveryAmount);
-
-
-            Debug.Log("Picked up an orange and recovered health.");
-
-            Destroy(gameObject);
-        }
+        playerController.Heal(healthRecoveryAmount);
     }
 }

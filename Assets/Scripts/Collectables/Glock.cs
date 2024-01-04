@@ -1,12 +1,7 @@
 using UnityEngine;
 
-public class Glock : MonoBehaviour
+public class Glock : Weapon
 {
-    public float damage = 10f;
-    public float range = 100f;
-    public int maxAmmo = 15; 
-    public int currentAmmo; 
-    public int reserveAmmo = 45; 
 
     void Start()
     {
@@ -20,7 +15,8 @@ public class Glock : MonoBehaviour
         {
             if (currentAmmo > 0)
             {
-                Shoot();
+                if (canShoot)
+                StartCoroutine(DelayBeforeShoot(fireRate));
             }
             else
             {
@@ -31,44 +27,8 @@ public class Glock : MonoBehaviour
         // Reloading
         if (Input.GetKeyDown(KeyCode.R))
         {
-            Reload();
+            StartCoroutine(ReloadTime(reloadTime));
         }
-    }
-
-    void Shoot()
-    {
-        currentAmmo--;
-
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, range))
-        {
-            Debug.Log(hit.transform.name);
-
-            // hit.transform.GetComponent<Health>().TakeDamage(damage);
-        }
-    }
-
-    void Reload()
-    {
-        if (reserveAmmo > 0 && currentAmmo < maxAmmo)
-        {
-            int ammoNeeded = maxAmmo - currentAmmo;
-            int ammoToReload = Mathf.Min(ammoNeeded, reserveAmmo);
-
-            currentAmmo += ammoToReload;
-            reserveAmmo -= ammoToReload;
-
-        }
-        else if (reserveAmmo <= 0)
-        {
-            Debug.Log("No Ammo");
-        }
-    }
-
-    public void AddAmmo(int amount)
-    {
-        reserveAmmo += amount;
-        Debug.Log("Added " + amount + " ammo. Current reserve ammo: " + reserveAmmo);
     }
 
 }

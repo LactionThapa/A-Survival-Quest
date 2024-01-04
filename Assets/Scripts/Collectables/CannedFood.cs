@@ -1,20 +1,11 @@
 using UnityEngine;
 
-public class CannedFood : MonoBehaviour
+public class CannedFood : Item
 {
     public int healthRecoveryAmount = 50;
 
-    public void Consume()
+    public override void UseItem(PlayerController playerController)
     {
-        Debug.Log("Health should increase by {healthRecoveryAmount}.");
-        Destroy(gameObject);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            Consume();
-        }
+        playerController.Heal(healthRecoveryAmount);
     }
 }

@@ -5,10 +5,11 @@ using UnityEngine;
 public class ZombieStats : MonoBehaviour
 {
     protected int health;
-    private int damage;
+    public int damage {  get; private set; }
     public float attackSpeed;
     protected bool isDead;
     private bool canAttack;
+    [field:SerializeField] public PlayerController playerController { get; private set; }
 
     void Start()
     {

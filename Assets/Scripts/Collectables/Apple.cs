@@ -1,20 +1,11 @@
 using UnityEngine;
 
-public class Apple : MonoBehaviour
+public class Apple : Item
 {
-    public int healthRecoveryAmount = 15;  
+    public int healthRecoveryAmount = 15;
 
-    void OnTriggerEnter(Collider other)
+    public override void UseItem(PlayerController playerController)
     {
-        if (other.CompareTag("Player"))  
-        {
-            Consume();
-        }
-    }
-
-    void Consume()
-    {
-        Debug.Log("Health should increase by {healthRecoveryAmount}.");
-        Destroy(gameObject);
+        playerController.Heal(healthRecoveryAmount);
     }
 }

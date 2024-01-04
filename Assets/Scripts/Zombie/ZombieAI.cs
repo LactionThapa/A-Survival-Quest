@@ -85,6 +85,7 @@ public class ZombieAI : MonoBehaviour
     private void Attack()
     {
         animator.SetTrigger("Attack");
+        stats.playerController.DealDamage(stats.damage);
     }
 
     private void Patrol()
