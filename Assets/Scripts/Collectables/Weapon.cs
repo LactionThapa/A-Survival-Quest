@@ -7,7 +7,7 @@ using UnityEngine;
 public abstract class Weapon : MonoBehaviour
 {
     protected int currentAmmo;
-    [SerializeField] protected int Damage;
+    [SerializeField] public int Damage;
     [SerializeField] protected int maxAmmo;
     [SerializeField] protected float range = 100f;
     [SerializeField] protected int reserveAmmo = 45;
@@ -19,6 +19,11 @@ public abstract class Weapon : MonoBehaviour
     private float timeToUp = 0;
     private float timeToDown = 0;
     private float yCord;
+    private Vector3 directionToShoot;
+    private Ray ray;
+    [SerializeField] public GameObject ShootPoint;
+    [SerializeField] public GameObject RayStartPoint;
+    [SerializeField] private LayerMask EnemyLayer;
 
     public void addAmmo(int AmmoToAdd)
     {
@@ -41,14 +46,58 @@ public abstract class Weapon : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        Debug.Log(RayStartPoint);
+        currentAmmo = maxAmmo;
+    }
+
+    public void Update()
+    {
+
+        ray = new Ray(RayStartPoint.transform.position, SetDirectionToShoot());
+
+        // Shooting
+        if (Input.GetButtonDown("Fire1"))
+        {
+            if (currentAmmo > 0)
+            {
+                if (canShoot)
+                    StartCoroutine(DelayBeforeShoot(fireRate));
+            }
+            else
+            {
+                Debug.Log("No Ammo");
+            }
+        }
+
+        // Reloading
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            StartCoroutine(ReloadTime(reloadTime));
+        }
+    }
+
+    public Vector3 SetDirectionToShoot()
+    {
+        Vector3 direction = (ShootPoint.transform.position - RayStartPoint.transform.position).normalized;
+        //directionToShoot = (ShootPoint - transform.TransformPoint(transform.position)).normalized;
+        //Debug.Log(direction);
+        //Debug.Log(directionToShoot);
+        return direction;
+    }
     protected void Shoot()
     {
         currentAmmo--;
+        Debug.DrawRay(RayStartPoint.transform.position, SetDirectionToShoot() * 100, Color.red);
 
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, range))
+        if (Physics.Raycast(ray, out hit, range, EnemyLayer))
         {
             Debug.Log(hit.transform.name);
+            hit.transform.TryGetComponent(out ZombieStats stats);
+            stats?.TakeDamage(Damage);
+
 
             // hit.transform.GetComponent<Health>().Take (damage);
         }

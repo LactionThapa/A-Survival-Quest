@@ -36,6 +36,7 @@ public class ZombieStats : MonoBehaviour
     {
         health -= incomingDamage;
         CheckHealth();
+        Debug.Log("damage dealt");
     }
     public int DealDamage(int statsToDamage)
     {

@@ -14,12 +14,14 @@ public abstract class Item : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.layer == 6)
+        {
+            other.transform.gameObject.TryGetComponent(out PlayerController playerController);
 
-        other.transform.gameObject.TryGetComponent(out PlayerController playerController);
+            UseItem(playerController);
 
-        UseItem(playerController);
-
-        Consume();
+            Consume();
+        }
 
     }
 

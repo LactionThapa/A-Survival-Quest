@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.PlasticSCM.Editor.WebApi;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -14,7 +15,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 userInput;
     private Transform playerCamera;
     private int health;
-    public Weapon Weapon;
+    [SerializeField] public Weapon Weapon;
     [SerializeField] Slider slider;
     [SerializeField] TextMeshProUGUI text;
     [SerializeField, Range(0, 1000)] int maxHealth;
@@ -25,7 +26,6 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         playerCamera = Camera.main.transform;
-        Weapon = new Glock();
         slider.maxValue = maxHealth;
         health = 10;
         slider.value = health;
@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
         text.text = $"{health}";
     }
 
-    internal void DealDamage(int damage)
+    public void DealDamage(int damage)
     {
         if (health - damage <= 0)
         {
@@ -73,4 +73,5 @@ public class PlayerController : MonoBehaviour
         slider.value = health;
         text.text = $"{health}";
     }
+
 }
