@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ZombieStats : MonoBehaviour
 {
     protected int health;
-    public int damage {  get; private set; }
+    public int damage { get; private set; }
     public float attackSpeed;
     protected bool isDead;
     private bool canAttack;
-    [field:SerializeField] public PlayerController playerController { get; private set; }
+    [field: SerializeField] public PlayerController playerController { get; private set; }
+    [SerializeField] private ParticleSystem bloodParticle;
+    [SerializeField] public GameObject bloodSprayPosition;
 
     void Start()
     {
@@ -34,17 +37,30 @@ public class ZombieStats : MonoBehaviour
     }
     public void TakeDamage(int incomingDamage)
     {
-        health -= incomingDamage;
-        CheckHealth();
-        Debug.Log("damage dealt");
+        if (health - incomingDamage > 0 && isDead == false)
+        {
+            health -= incomingDamage;
+        var blood = Instantiate(bloodParticle, bloodSprayPosition.transform.position, Quaternion.identity);
+        StartCoroutine(WaitBeforeVanish(0.2f, blood.gameObject));
+        }
+        else if (isDead == false)
+        {
+            health = 0;
+            isDead = true;
+            var blood = Instantiate(bloodParticle, bloodSprayPosition.transform.position, Quaternion.identity);
+            StartCoroutine(WaitBeforeVanish(0.2f, blood.gameObject));
+            StartCoroutine(WaitBeforeVanish(0.21f, gameObject));
+        }
     }
     public int DealDamage(int statsToDamage)
     {
         statsToDamage -= damage;
         return statsToDamage;
     }
-    void Update()
-    {
 
+    private IEnumerator WaitBeforeVanish(float duration, GameObject particle)
+    {
+        yield return new WaitForSeconds(duration);
+        Destroy(particle);
     }
 }

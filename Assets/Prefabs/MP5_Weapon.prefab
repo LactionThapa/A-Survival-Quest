@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &676092155778758028
 Transform:
   m_ObjectHideFlags: 0
@@ -60,6 +60,11 @@ MonoBehaviour:
   typeOfAmmo: 0
   fireRate: 0.125
   reloadTime: 3
+  ShootPoint: {fileID: 0}
+  RayStartPoint: {fileID: 0}
+  EnemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &1804152807808768008
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,6 +7,6 @@ public class GlockAmmo : Item
     public override void UseItem(PlayerController playerController)
     {
         if (playerController.Weapon.typeOfAmmo == AmmoType.Pistol)
-        playerController.Weapon.addAmmo(ammoAmount);
+        playerController.Weapon?.addAmmo(ammoAmount);
     }
 }

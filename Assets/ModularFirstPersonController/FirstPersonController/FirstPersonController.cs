@@ -8,6 +8,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 #if UNITY_EDITOR
     using UnityEditor;
@@ -17,6 +18,7 @@ using UnityEngine.UI;
 public class FirstPersonController : MonoBehaviour
 {
     private Rigidbody rb;
+    public static Action JumpAction;
 
     #region Camera Movement Variables
 
@@ -466,6 +468,7 @@ public class FirstPersonController : MonoBehaviour
         {
             rb.AddForce(0f, jumpPower, 0f, ForceMode.Impulse);
             isGrounded = false;
+            JumpAction.Invoke();
         }
 
         // When crouched and using toggle system, will uncrouch for a jump

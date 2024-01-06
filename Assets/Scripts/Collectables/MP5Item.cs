@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class MP5Item : Item
 {
-    [SerializeField] private Weapon mp5;
     public override void UseItem(PlayerController playerController)
     {
-        playerController.Weapon = mp5;
+        playerController.mp5IsAvailable = true;
+        playerController.AddWeapon();
     }
 }

@@ -7,6 +7,6 @@ public class MP5Magazine : Item
     public override void UseItem(PlayerController playerController)
     {
         if (playerController.Weapon.typeOfAmmo == AmmoType.MachineGun)
-        playerController.Weapon.addAmmo(ammoAmount);
+        playerController.Weapon?.addAmmo(ammoAmount);
     }
 }

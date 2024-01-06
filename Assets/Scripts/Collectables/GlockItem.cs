@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class GlockItem : Item
 {
-    [SerializeField] private Weapon glock;
     public override void UseItem(PlayerController playerController)
     {
-        playerController.Weapon = glock;
+        playerController.glockIsAvailable = true;
+        playerController.AddWeapon();
     }
 }
