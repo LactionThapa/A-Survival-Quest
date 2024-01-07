@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 
 #if UNITY_EDITOR
     using UnityEditor;
@@ -202,14 +203,30 @@ public class FirstPersonController : MonoBehaviour
         }
 
         #endregion
+
     }
 
     float camRotation;
 
     private void Update()
     {
+        GameObject[] zombies = GameObject.FindGameObjectsWithTag("ZombieEnemies");
+        string currentSceneName = SceneManager.GetActiveScene().name;
+
         mouseSensitivity = SliderManager.sliderValue;
         invertCamera = SliderManager.invertCamera;
+
+        if (zombies.Length <= 0)
+        {
+            if (currentSceneName == "Level 2")
+            // Move to the next scene when zombie count is 0 if current scene is level 2
+            SceneManager.LoadScene("Level 3");
+            else
+            {
+                //Otherwise move to level 2
+                SceneManager.LoadScene("Level 2");
+            }
+        }
 
         #region Camera
 
