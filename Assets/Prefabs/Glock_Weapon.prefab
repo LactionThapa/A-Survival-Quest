@@ -240,12 +240,13 @@ MonoBehaviour:
   RayStartPoint: {fileID: 0}
   EnemyLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   audioSource: {fileID: 0}
   addAmmoClip: {fileID: 0}
   fireClip: {fileID: 0}
   ShotSmokePosition: {fileID: 0}
   shootParticle: {fileID: 0}
+  bulletTracer: {fileID: 0}
 --- !u!1 &3876175428921410134
 GameObject:
   m_ObjectHideFlags: 0
