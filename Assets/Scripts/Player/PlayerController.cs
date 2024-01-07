@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using static System.Net.Mime.MediaTypeNames;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -85,7 +86,14 @@ public class PlayerController : MonoBehaviour
         if (health - damage <= 0)
         {
             health = 0;
-            gameOverPanel.SetActive(true);
+            if (SliderManager.instantRetry)
+            {
+                SceneManager.LoadScene("MainScene");
+            }
+            else
+            {
+                SceneManager.LoadScene("Death");
+            }
         }
         else
             health -= damage;

@@ -133,6 +133,8 @@ public class FirstPersonController : MonoBehaviour
 
     #endregion
 
+    private PlayerPause playerPause;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -153,7 +155,9 @@ public class FirstPersonController : MonoBehaviour
 
     void Start()
     {
-        if(lockCursor)
+        playerPause = FindObjectOfType<PlayerPause>();
+
+        if (lockCursor)
         {
             Cursor.lockState = CursorLockMode.Locked;
         }
@@ -204,28 +208,34 @@ public class FirstPersonController : MonoBehaviour
 
     private void Update()
     {
+        mouseSensitivity = SliderManager.sliderValue;
+        invertCamera = SliderManager.invertCamera;
+
         #region Camera
 
         // Control camera movement
-        if(cameraCanMove)
+        if (Time.timeScale != 0f)
         {
-            yaw = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * mouseSensitivity;
-
-            if (!invertCamera)
+            if (cameraCanMove)
             {
-                pitch -= mouseSensitivity * Input.GetAxis("Mouse Y");
-            }
-            else
-            {
-                // Inverted Y
-                pitch += mouseSensitivity * Input.GetAxis("Mouse Y");
-            }
+                yaw = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * mouseSensitivity;
 
-            // Clamp pitch between lookAngle
-            pitch = Mathf.Clamp(pitch, -maxLookAngle, maxLookAngle);
+                if (!invertCamera)
+                {
+                    pitch -= mouseSensitivity * Input.GetAxis("Mouse Y");
+                }
+                else
+                {
+                    // Inverted Y
+                    pitch += mouseSensitivity * Input.GetAxis("Mouse Y");
+                }
 
-            transform.localEulerAngles = new Vector3(0, yaw, 0);
-            playerCamera.transform.localEulerAngles = new Vector3(pitch, 0, 0);
+                // Clamp pitch between lookAngle
+                pitch = Mathf.Clamp(pitch, -maxLookAngle, maxLookAngle);
+
+                transform.localEulerAngles = new Vector3(0, yaw, 0);
+                playerCamera.transform.localEulerAngles = new Vector3(pitch, 0, 0);
+            }
         }
 
         #region Camera Zoom
@@ -273,6 +283,12 @@ public class FirstPersonController : MonoBehaviour
 
         #endregion
         #endregion
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Cursor.lockState = CursorLockMode.None;
+            playerPause.Pause();
+        }
 
         #region Sprint
 

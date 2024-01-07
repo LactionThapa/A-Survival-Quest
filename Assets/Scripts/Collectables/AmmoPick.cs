@@ -11,7 +11,7 @@ public class AmmoPick : MonoBehaviour
             Glock glock = other.GetComponentInChildren<Glock>();
             if (glock != null)
             {
-                glock.AddAmmo(ammoAmount);
+                glock.addAmmo(ammoAmount);
                 Destroy(gameObject);
             }
         }
