@@ -50,21 +50,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 1175841539032569090}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d55536e23737ab47b0569ea1344eb7f, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b6903643382f49448857b49f3c9e09d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 50
-  maxAmmo: 30
+  Damage: 0
+  maxAmmo: 0
   range: 100
-  reserveAmmo: 90
+  reserveAmmo: 45
   typeOfAmmo: 0
-  fireRate: 0.125
-  reloadTime: 3
+  fireRate: 0
+  reloadTime: 0
   ShootPoint: {fileID: 0}
   RayStartPoint: {fileID: 0}
   EnemyLayer:
     serializedVersion: 2
     m_Bits: 0
+  audioSource: {fileID: 0}
+  addAmmoClip: {fileID: 0}
+  fireClip: {fileID: 0}
+  ShotSmokePosition: {fileID: 0}
+  shootParticle: {fileID: 0}
+  bulletTracer: {fileID: 0}
 --- !u!1 &1804152807808768008
 GameObject:
   m_ObjectHideFlags: 0

@@ -226,16 +226,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2631771177401339833}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c9501e6dc3feee4284949f1bde4ebde, type: 3}
+  m_Script: {fileID: 11500000, guid: cde883189afff4e17a70607607d5d976, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 25
-  maxAmmo: 20
+  Damage: 0
+  maxAmmo: 0
   range: 100
-  reserveAmmo: 60
+  reserveAmmo: 45
   typeOfAmmo: 0
-  fireRate: 0.5
-  reloadTime: 3
+  fireRate: 0
+  reloadTime: 0
   ShootPoint: {fileID: 0}
   RayStartPoint: {fileID: 0}
   EnemyLayer:
@@ -246,6 +246,7 @@ MonoBehaviour:
   fireClip: {fileID: 0}
   ShotSmokePosition: {fileID: 0}
   shootParticle: {fileID: 0}
+  bulletTracer: {fileID: 0}
 --- !u!1 &3876175428921410134
 GameObject:
   m_ObjectHideFlags: 0
