@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.42226914, g: 0.64370704, b: 0.7936686, a: 1}
+  m_IndirectSpecularColor: {r: 0.42221254, g: 0.64316183, b: 0.793691, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5313,7 +5313,7 @@ GameObject:
   - component: {fileID: 697186801}
   - component: {fileID: 697186800}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: HealthText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7392,13 +7392,29 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6285210767303787844, guid: c198c5a21f1e9cd4f98f312829bf744a, type: 3}
+      propertyPath: Damage
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 6285210767303787844, guid: c198c5a21f1e9cd4f98f312829bf744a, type: 3}
+      propertyPath: maxAmmo
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6285210767303787844, guid: c198c5a21f1e9cd4f98f312829bf744a, type: 3}
       propertyPath: fireClip
       value: 
       objectReference: {fileID: 8300000, guid: 8602b7d5cd15c1943a50aa53f171c8cf, type: 3}
     - target: {fileID: 6285210767303787844, guid: c198c5a21f1e9cd4f98f312829bf744a, type: 3}
+      propertyPath: fireRate
+      value: 0.125
+      objectReference: {fileID: 0}
+    - target: {fileID: 6285210767303787844, guid: c198c5a21f1e9cd4f98f312829bf744a, type: 3}
       propertyPath: ShootPoint
       value: 
       objectReference: {fileID: 775074114}
+    - target: {fileID: 6285210767303787844, guid: c198c5a21f1e9cd4f98f312829bf744a, type: 3}
+      propertyPath: reloadTime
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6285210767303787844, guid: c198c5a21f1e9cd4f98f312829bf744a, type: 3}
       propertyPath: typeOfAmmo
       value: 1
@@ -7411,6 +7427,10 @@ PrefabInstance:
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 1670936512}
+    - target: {fileID: 6285210767303787844, guid: c198c5a21f1e9cd4f98f312829bf744a, type: 3}
+      propertyPath: reserveAmmo
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 6285210767303787844, guid: c198c5a21f1e9cd4f98f312829bf744a, type: 3}
       propertyPath: bulletTracer
       value: 
@@ -7463,6 +7483,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1670936512}
   m_SourcePrefab: {fileID: 100100000, guid: c198c5a21f1e9cd4f98f312829bf744a, type: 3}
+--- !u!114 &1009908739 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6285210767303787844, guid: c198c5a21f1e9cd4f98f312829bf744a, type: 3}
+  m_PrefabInstance: {fileID: 1009908738}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670936511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b6903643382f49448857b49f3c9e09d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1023805013
 GameObject:
   m_ObjectHideFlags: 0
@@ -11994,12 +12025,12 @@ MonoBehaviour:
   mp5IsAvailable: 0
   Weapon: {fileID: 0}
   slider: {fileID: 1347949655}
-  text: {fileID: 697186800}
+  HealthText: {fileID: 697186800}
   maxHealth: 100
   gameOverPanel: {fileID: 387890799}
   WeaponSlots:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1009908739}
+  - {fileID: 2120855250}
   <AudioSource>k__BackingField: {fileID: 1579244261}
   jumpClip: {fileID: 8300000, guid: 5a618c007fe353c459f6916c3860e274, type: 3}
   healingClip: {fileID: 8300000, guid: a9646a6173bb6ad4b951ea60adaaa407, type: 3}
@@ -15974,9 +16005,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 8602b7d5cd15c1943a50aa53f171c8cf, type: 3}
     - target: {fileID: 4087605154698445546, guid: d4a97bdb33b125f4488a0b3623c15be0, type: 3}
+      propertyPath: fireRate
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4087605154698445546, guid: d4a97bdb33b125f4488a0b3623c15be0, type: 3}
       propertyPath: ShootPoint
       value: 
       objectReference: {fileID: 775074114}
+    - target: {fileID: 4087605154698445546, guid: d4a97bdb33b125f4488a0b3623c15be0, type: 3}
+      propertyPath: reloadTime
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4087605154698445546, guid: d4a97bdb33b125f4488a0b3623c15be0, type: 3}
       propertyPath: addAmmoClip
       value: 
@@ -16077,6 +16116,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1953144451}
   m_SourcePrefab: {fileID: 100100000, guid: d4a97bdb33b125f4488a0b3623c15be0, type: 3}
+--- !u!114 &2120855250 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4087605154698445546, guid: d4a97bdb33b125f4488a0b3623c15be0, type: 3}
+  m_PrefabInstance: {fileID: 2120855249}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 255921132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cde883189afff4e17a70607607d5d976, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2139980379
 PrefabInstance:
   m_ObjectHideFlags: 0

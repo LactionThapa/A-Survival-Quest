@@ -18,9 +18,9 @@ public class PlayerController : MonoBehaviour
     private int health;
     public bool glockIsAvailable = false;
     public bool mp5IsAvailable = false;
-    [SerializeField] public Weapon Weapon;
+    [HideInInspector] public Weapon Weapon;
     [SerializeField] Slider slider;
-    [SerializeField] TextMeshProUGUI text;
+    [SerializeField] TextMeshProUGUI HealthText;
     [SerializeField, Range(0, 1000)] int maxHealth;
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private List<Weapon> WeaponSlots = new List<Weapon>();
@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
         slider.maxValue = maxHealth;
         health = 10;
         slider.value = health;
-        text.text = $"{health}";
+        HealthText.text = $"{health}";
         FirstPersonController.JumpAction += Jump;
     }
 
@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
         else
             health += healthRecoveryAmount;
         slider.value = health;
-        text.text = $"{health}";
+        HealthText.text = $"{health}";
         AudioSource.clip = healingClip;
         AudioSource.Play();
     }
@@ -98,7 +98,7 @@ public class PlayerController : MonoBehaviour
         else
             health -= damage;
         slider.value = health;
-        text.text = $"{health}";
+        HealthText.text = $"{health}";
     }
 
     private void ChangeWeapon(int slotNumber)
