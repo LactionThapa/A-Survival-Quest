@@ -2125,10 +2125,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a257f1a6ab9a1a42a810f9a3a62c147, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 100
+  damage: 10
   attackSpeed: 1.5
-  <playerController>k__BackingField: {fileID: 0}
   bloodParticle: {fileID: 198000011254678926, guid: abb9f519b142e304d9c45b56afa768bc, type: 3}
   bloodSprayPosition: {fileID: 7870628856774117518}
+  <playerController>k__BackingField: {fileID: 0}
 --- !u!136 &-361341605713256649
 CapsuleCollider:
   m_ObjectHideFlags: 0
