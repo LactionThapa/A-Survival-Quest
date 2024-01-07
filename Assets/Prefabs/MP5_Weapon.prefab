@@ -58,19 +58,13 @@ MonoBehaviour:
   range: 100
   reserveAmmo: 90
   typeOfAmmo: 0
-  fireRate: 0
+  fireRate: 0.125
   reloadTime: 3
   ShootPoint: {fileID: 0}
   RayStartPoint: {fileID: 0}
   EnemyLayer:
     serializedVersion: 2
-    m_Bits: 128
-  audioSource: {fileID: 0}
-  addAmmoClip: {fileID: 0}
-  fireClip: {fileID: 0}
-  ShotSmokePosition: {fileID: 0}
-  shootParticle: {fileID: 0}
-  bulletTracer: {fileID: 0}
+    m_Bits: 0
 --- !u!1 &1804152807808768008
 GameObject:
   m_ObjectHideFlags: 0

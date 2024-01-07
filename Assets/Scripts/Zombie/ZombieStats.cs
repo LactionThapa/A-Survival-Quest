@@ -5,22 +5,22 @@ using UnityEngine;
 
 public class ZombieStats : MonoBehaviour
 {
-    [SerializeField] protected int health;
-    [SerializeField] public int damage;
-    [SerializeField] public float attackSpeed;
-    [SerializeField] private ParticleSystem bloodParticle;
-    [SerializeField] public GameObject bloodSprayPosition;
-    [field: SerializeField] public PlayerController playerController { get; private set; }
-    private Animator animator = null;
+    protected int health;
+    public int damage { get; private set; }
+    public float attackSpeed;
     protected bool isDead;
     private bool canAttack;
-
+    [field: SerializeField] public PlayerController playerController { get; private set; }
+    [SerializeField] private ParticleSystem bloodParticle;
+    [SerializeField] public GameObject bloodSprayPosition;
 
     void Start()
     {
+        health = 50;
         isDead = false;
+        damage = 10;
+        attackSpeed = 1.5f;
         canAttack = true;
-        animator = GetComponent<Animator>();
     }
     public void CheckHealth()
     {
@@ -40,15 +40,13 @@ public class ZombieStats : MonoBehaviour
         if (health - incomingDamage > 0 && isDead == false)
         {
             health -= incomingDamage;
-            animator.SetTrigger("Damage");
-            var blood = Instantiate(bloodParticle, bloodSprayPosition.transform.position, Quaternion.identity);
+        var blood = Instantiate(bloodParticle, bloodSprayPosition.transform.position, Quaternion.identity);
         StartCoroutine(WaitBeforeVanish(0.2f, blood.gameObject));
         }
         else if (isDead == false)
         {
             health = 0;
             isDead = true;
-            animator.SetTrigger("Damage");
             var blood = Instantiate(bloodParticle, bloodSprayPosition.transform.position, Quaternion.identity);
             StartCoroutine(WaitBeforeVanish(0.2f, blood.gameObject));
             StartCoroutine(WaitBeforeVanish(0.21f, gameObject));
@@ -64,9 +62,5 @@ public class ZombieStats : MonoBehaviour
     {
         yield return new WaitForSeconds(duration);
         Destroy(particle);
-    }
-    public bool IsDead()
-    {
-        return isDead;
     }
 }

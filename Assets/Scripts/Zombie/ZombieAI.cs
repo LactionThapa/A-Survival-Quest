@@ -13,12 +13,6 @@ public class ZombieAI : MonoBehaviour
     private bool hasStopped = false;
     private ZombieStats stats = null;
     private GameObject target;
-    private Vector3 spawnPoint;
-    private float maxX;
-    private float minX;
-    private float maxZ;
-    private float minZ;
-    private float radius = 5;
     //[SerializeField] private Transform target;
 
     private Vector3 walkPoint;
@@ -29,12 +23,6 @@ public class ZombieAI : MonoBehaviour
     {
         GetReference();
         target = GameObject.FindGameObjectWithTag("Player");
-        spawnPoint = agent.transform.position;
-        maxX = spawnPoint.x + radius;
-        minX = spawnPoint.x - radius;
-        maxZ = spawnPoint.z + radius;
-        minZ = spawnPoint.z - radius;
-
     }
 
     // Update is called once per frame
@@ -53,14 +41,15 @@ public class ZombieAI : MonoBehaviour
     private void MoveToTarget()
     {
         agent.SetDestination(target.transform.position);
-        animator.SetFloat("Speed", 1f, 0.0f, Time.deltaTime);
+        animator.SetFloat("Velocity", 1f, 0.0f, Time.deltaTime);
         RotateToTarget();
 
         float distanceToTarget = Vector3.Distance(target.transform.position, transform.position);
 
         if (distanceToTarget <= agent.stoppingDistance)
         {
-            animator.SetFloat("Speed", 0f, 0.0f, Time.deltaTime);
+            animator.SetFloat("Velocity", 0f);
+            animator.SetFloat("Speed", 0f);
             if (!hasStopped)
             {
                 hasStopped = true;
@@ -96,29 +85,23 @@ public class ZombieAI : MonoBehaviour
     private void Attack()
     {
         animator.SetTrigger("Attack");
-        //stats.playerController.DealDamage(stats.damage);
+        stats.playerController.DealDamage(stats.damage);
     }
 
     private void Patrol()
     {
-        float randomZ = Random.Range(-5, 5);
-        float randomX = Random.Range(-5, 5);
+        float randomZ = Random.Range(-100, 100);
+        float randomX = Random.Range(-100, 100);
 
-        checkRadius(randomX, randomZ);
         walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
         float distanceToWalk = Vector3.Distance(walkPoint, transform.position);
 
         float distanceToTarget = Vector3.Distance(target.transform.position, transform.position);
-        if (distanceToTarget > 15)
+        if (distanceToTarget > 5)
         {
             agent.SetDestination(walkPoint);
-            animator.SetFloat("Speed", 0.25f, 0.0f, Time.deltaTime);
+            animator.SetFloat("Speed", 1f, 0.0f, Time.deltaTime);
 
-        }
-        else if (distanceToTarget > 6 && distanceToTarget < 15)
-        {
-            agent.SetDestination(walkPoint);
-            animator.SetFloat("Speed", 0.5f, 0.0f, Time.deltaTime);
         }
         else
         {
@@ -126,20 +109,6 @@ public class ZombieAI : MonoBehaviour
         }
 
 
-
-    }
-    private void checkRadius(float x, float z)
-    {
-        float nextXPosition = transform.position.x + x;
-        float nextZPosition = transform.position.z + z;
-        while (nextXPosition > maxX || nextZPosition > maxZ || nextXPosition < minX || nextZPosition < minZ)
-        {
-            float randomZ = Random.Range(-5, 5);
-            float randomX = Random.Range(-5, 5);
-            nextXPosition = transform.position.x + randomX;
-            nextZPosition = transform.position.z + randomZ;
-
-        }
 
     }
 
