@@ -8,6 +8,7 @@ The movement system that is utilized for this game consists of:
 - Shift to sprint
 - Left-Click to shoot
 - Right-Click to zoom
+- 1 and 2 for weapon slots
 
 ### Game Objective: 
 
